@@ -200,8 +200,11 @@ mstring_free(struct mstring *o)
 {
 	if (o->value != NULL && o->len > 0) {
 		bzero(o->value, o->len);
-		free(o->value);
 	}
+    /*
+     * Always free to allow empty strings
+     */
+	free(o->value);
 	bzero(o, sizeof(*o));
 	free(o);
 }
